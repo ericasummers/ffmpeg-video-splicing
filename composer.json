@@ -1,0 +1,8 @@
+{
+    "require": {
+        "phpunit/phpunit": "4.5.*",
+        "silex/silex": "~1.1",
+        "twig/twig": "~1.0",
+        "php-ffmpeg/php-ffmpeg": "^0.9.5"
+    }
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="home-content" id="main">
+            <div class="container">
+                <h1>TEST</h1>
+                <h3>Images</h3>
+                    {% for image in images %}
+                        <img src="{{folderPath}}/{{image}}">
+                        {{baseUrl}}{{folderPath}}/{{image}}
+                    {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
