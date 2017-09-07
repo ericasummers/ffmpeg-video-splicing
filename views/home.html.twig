@@ -6,8 +6,9 @@
                 <h1>TEST</h1>
                 <h3>Images</h3>
                     {% for image in images %}
-                        <img src="{{folderPath}}/{{image}}">
+                        <img src="{{baseUrl}}/{{image}}">
                         {{baseUrl}}{{folderPath}}/{{image}}
+                        <br>
                     {% endfor %}
             </div>
         </div>

@@ -13,14 +13,25 @@
 
     $app->get("/", function(Request $request) use ($app) {
         $movFilePath = __DIR__.'/../web/movies/sample_iTunes.mov';
-        $folderPath = str_replace('.mov', '', $movFilePath);
+        $videoFileEndings = ['.mov', '.avi', '.gif', '.mp4', '.webm'];
+        $folderPath = str_replace($videoFileEndings, '', $movFilePath);
         $images = [];
         if (file_exists($folderPath)) {
-            $images = array_diff(scandir($folderPath), array('..', '.'));
+            $allFolderFileNames = array_diff(scandir($folderPath), array('..', '.'));
+            foreach($allFolderFileNames as $fileName) {
+                if (pathinfo($fileName)['extension'] === 'jpg' || pathinfo($fileName)['extension'] === 'png') {
+                    array_push($images, $fileName);
+                }
+            }
         } else {
             mkdir($folderPath);
-            `ffmpeg -i ${movFilePath} -vf fps=1/30 ${folderPath}/img%03d.png`;
-            $images = array_diff(scandir($folderPath), array('..', '.'));
+            exec('ffmpeg -i ' . $movFilePath . ' -vf fps=1/30 ' . $folderPath . '/img%03d.png');
+            $allFolderFileNames = array_diff(scandir($folderPath), array('..', '.'));
+            foreach($allFolderFileNames as $fileName) {
+                if (pathinfo($fileName)['extension'] === 'jpg' || pathinfo($fileName)['extension'] === 'png') {
+                    array_push($images, $fileName);
+                }
+            }
         }
 
         $baseUrl = $request->getSchemeAndHttpHost();
