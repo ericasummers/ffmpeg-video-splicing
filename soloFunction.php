@@ -17,15 +17,15 @@
             }
             retrieveFolderImages($folderPath);
         }
-        return $images;
     }
 
     function retrieveFolderImages(folderPath) {
         $images = [];
         $allFolderFileNames = array_diff(scandir(folderPath), array('..', '.'));
-            foreach($allFolderFileNames as $fileName) {
-                if (pathinfo($fileName)['extension'] === 'jpg' || pathinfo($fileName)['extension'] === 'png') {
-                    array_push($images, $fileName);
-                }
+        foreach($allFolderFileNames as $fileName) {
+            if (pathinfo($fileName)['extension'] === 'jpg' || pathinfo($fileName)['extension'] === 'png') {
+                array_push($images, $fileName);
             }
+        }
+        return $images;
     }
